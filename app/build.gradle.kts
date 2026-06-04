@@ -25,6 +25,8 @@ val deployedBaseUrl = localOrEnv(
     "https://yuk24-backend.onrender.com/"
 )
 val emulatorBaseUrl = localOrEnv("yuk24.base.url.debug", "YUK24_BASE_URL_DEBUG", deployedBaseUrl)
+// OpenRouteService key for map polyline (debug/local). Add ors.api.key=... to local.properties — never commit keys.
+val orsApiKey = localOrEnv("ors.api.key", "ORS_API_KEY", "")
 
 android {
     namespace = "uz.yuk24.app"
@@ -47,6 +49,7 @@ android {
         debug {
             isMinifyEnabled = false
             buildConfigField("String", "BASE_URL", "\"$emulatorBaseUrl\"")
+            buildConfigField("String", "ORS_API_KEY", "\"$orsApiKey\"")
         }
         release {
             isMinifyEnabled = true
@@ -55,6 +58,7 @@ android {
                 "proguard-rules.pro"
             )
             buildConfigField("String", "BASE_URL", "\"$deployedBaseUrl\"")
+            buildConfigField("String", "ORS_API_KEY", "\"$orsApiKey\"")
         }
     }
 
@@ -115,4 +119,6 @@ dependencies {
     implementation(libs.play.services.location)
 
     implementation(libs.osmdroid.android)
+
+    testImplementation(libs.junit)
 }

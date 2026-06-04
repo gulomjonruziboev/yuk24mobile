@@ -8,16 +8,28 @@ import kotlinx.serialization.json.jsonPrimitive
 import uz.yuk24.app.domain.model.LatLng
 
 /**
- * Parses GeoJSON LineString geometry from `POST /api/route` into map points.
+ * Parses GeoJSON from `POST /api/route` into map points.
+ * Supports bare LineString, Feature, and FeatureCollection (ORS default).
  * Coordinates are `[lng, lat]` per GeoJSON; we expose `(lat, lng)` for the UI.
  */
 object RouteGeometryParser {
 
     fun parse(geometry: JsonElement?): List<LatLng> {
         if (geometry == null || geometry !is JsonObject) return emptyList()
-        val type = geometry["type"]?.jsonPrimitive?.content ?: return emptyList()
-        if (type != "LineString") return emptyList()
-        val coords = geometry["coordinates"] ?: return emptyList()
+        return when (geometry["type"]?.jsonPrimitive?.content) {
+            "LineString" -> parseLineString(geometry)
+            "Feature" -> geometry["geometry"]?.let { parse(it) }.orEmpty()
+            "FeatureCollection" -> {
+                val features = geometry["features"]?.jsonArray ?: return emptyList()
+                val first = features.firstOrNull() as? JsonObject ?: return emptyList()
+                parse(first)
+            }
+            else -> emptyList()
+        }
+    }
+
+    private fun parseLineString(obj: JsonObject): List<LatLng> {
+        val coords = obj["coordinates"] ?: return emptyList()
         if (coords !is JsonArray) return emptyList()
         return coords.mapNotNull { point ->
             if (point !is JsonArray || point.size < 2) return@mapNotNull null

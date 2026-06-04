@@ -124,24 +124,19 @@ fun Step1MapScreen(
     val mapEventsOverlay = remember {
         MapEventsOverlay(object : MapEventsReceiver {
             override fun singleTapConfirmedHelper(p: GeoPoint): Boolean {
-                val point = LocationPoint(
-                    label = "%.5f, %.5f".format(p.latitude, p.longitude),
-                    lat = p.latitude,
-                    lng = p.longitude
-                )
                 val current = viewModel.state.value
                 when {
                     current.pickup == null -> {
-                        viewModel.setPickup(point)
+                        viewModel.setPickupAt(p.latitude, p.longitude)
                         lastTouched = TapTarget.PICKUP
                     }
                     current.delivery == null -> {
-                        viewModel.setDelivery(point)
+                        viewModel.setDeliveryAt(p.latitude, p.longitude)
                         lastTouched = TapTarget.DELIVERY
                     }
                     else -> when (lastTouched) {
-                        TapTarget.PICKUP -> viewModel.setPickup(point)
-                        TapTarget.DELIVERY -> viewModel.setDelivery(point)
+                        TapTarget.PICKUP -> viewModel.setPickupAt(p.latitude, p.longitude)
+                        TapTarget.DELIVERY -> viewModel.setDeliveryAt(p.latitude, p.longitude)
                     }
                 }
                 return true
@@ -175,13 +170,7 @@ fun Step1MapScreen(
                 val gp = GeoPoint(loc.latitude, loc.longitude)
                 mapView.controller.animateTo(gp)
                 if (viewModel.state.value.pickup == null) {
-                    viewModel.setPickup(
-                        LocationPoint(
-                            label = context.getString(R.string.use_current_location),
-                            lat = loc.latitude,
-                            lng = loc.longitude
-                        )
-                    )
+                    viewModel.setPickupAt(loc.latitude, loc.longitude)
                     lastTouched = TapTarget.PICKUP
                 }
             }
@@ -213,13 +202,7 @@ fun Step1MapScreen(
             override fun onMarkerDrag(marker: Marker?) {}
             override fun onMarkerDragEnd(marker: Marker?) {
                 marker ?: return
-                viewModel.setPickup(
-                    LocationPoint(
-                        label = "%.5f, %.5f".format(marker.position.latitude, marker.position.longitude),
-                        lat = marker.position.latitude,
-                        lng = marker.position.longitude
-                    )
-                )
+                viewModel.setPickupAt(marker.position.latitude, marker.position.longitude)
                 lastTouched = TapTarget.PICKUP
             }
             override fun onMarkerDragStart(marker: Marker?) {}
@@ -228,13 +211,7 @@ fun Step1MapScreen(
             override fun onMarkerDrag(marker: Marker?) {}
             override fun onMarkerDragEnd(marker: Marker?) {
                 marker ?: return
-                viewModel.setDelivery(
-                    LocationPoint(
-                        label = "%.5f, %.5f".format(marker.position.latitude, marker.position.longitude),
-                        lat = marker.position.latitude,
-                        lng = marker.position.longitude
-                    )
-                )
+                viewModel.setDeliveryAt(marker.position.latitude, marker.position.longitude)
                 lastTouched = TapTarget.DELIVERY
             }
             override fun onMarkerDragStart(marker: Marker?) {}
@@ -272,13 +249,7 @@ fun Step1MapScreen(
                             val client = LocationServices.getFusedLocationProviderClient(context)
                             requestLocation(client) { loc ->
                                 val gp = GeoPoint(loc.latitude, loc.longitude)
-                                viewModel.setPickup(
-                                    LocationPoint(
-                                        label = context.getString(R.string.use_current_location),
-                                        lat = loc.latitude,
-                                        lng = loc.longitude
-                                    )
-                                )
+                                viewModel.setPickupAt(loc.latitude, loc.longitude)
                                 lastTouched = TapTarget.PICKUP
                                 mapView.controller.animateTo(gp)
                             }

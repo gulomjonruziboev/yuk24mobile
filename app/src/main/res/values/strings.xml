@@ -84,6 +84,7 @@
 
     <!-- Map screen -->
     <string name="use_current_location">Joriy joylashuv</string>
+    <string name="address_unknown">Manzil aniqlanmadi</string>
     <string name="grant_location_permission">Joylashuvga ruxsat bering</string>
     <string name="pickup_auto_hint">Xaritada bosib olish joyini belgilang</string>
     <string name="delivery_tap_hint">Yetkazish nuqtasini xaritada belgilang</string>

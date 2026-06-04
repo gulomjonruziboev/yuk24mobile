@@ -20,9 +20,9 @@ import uz.yuk24.app.domain.model.LocationPoint
 import uz.yuk24.app.domain.usecase.CreateOrderUseCase
 import uz.yuk24.app.domain.usecase.GetPriceUseCase
 import uz.yuk24.app.domain.usecase.GetRouteUseCase
+import uz.yuk24.app.util.AddressGeocoder
 import uz.yuk24.app.util.PhoneUtils
 import uz.yuk24.app.util.PricingUtils
-import uz.yuk24.app.util.RouteGeometryParser
 import javax.inject.Inject
 
 sealed interface PriceUiState {
@@ -48,8 +48,12 @@ class BookingViewModel @Inject constructor(
     private val getRoute: GetRouteUseCase,
     private val getPrice: GetPriceUseCase,
     private val createOrder: CreateOrderUseCase,
-    private val dataStore: DataStoreManager
+    private val dataStore: DataStoreManager,
+    private val addressGeocoder: AddressGeocoder
 ) : ViewModel() {
+
+    private var pickupGeocodeJob: Job? = null
+    private var deliveryGeocodeJob: Job? = null
 
     private val _state = MutableStateFlow(BookingState())
     val state: StateFlow<BookingState> = _state.asStateFlow()
@@ -94,6 +98,24 @@ class BookingViewModel @Inject constructor(
         refreshRoute()
     }
 
+    /** Sets pickup from map/GPS coordinates and resolves a street address for drivers. */
+    fun setPickupAt(lat: Double, lng: Double) {
+        pickupGeocodeJob?.cancel()
+        pickupGeocodeJob = viewModelScope.launch {
+            val label = addressGeocoder.resolveLabel(lat, lng)
+            setPickup(LocationPoint(label = label, lat = lat, lng = lng))
+        }
+    }
+
+    /** Sets delivery from map coordinates and resolves a street address for drivers. */
+    fun setDeliveryAt(lat: Double, lng: Double) {
+        deliveryGeocodeJob?.cancel()
+        deliveryGeocodeJob = viewModelScope.launch {
+            val label = addressGeocoder.resolveLabel(lat, lng)
+            setDelivery(LocationPoint(label = label, lat = lat, lng = lng))
+        }
+    }
+
     fun setLoadSize(loadSize: LoadSize) {
         _state.update { it.copy(loadSize = loadSize) }
         invalidatePrice()
@@ -134,7 +156,11 @@ class BookingViewModel @Inject constructor(
         routeJob = viewModelScope.launch {
             when (val result = getRoute(pickup, delivery)) {
                 is ApiResult.Success -> {
-                    _routeGeometry.value = RouteGeometryParser.parse(result.data.geometry)
+                    _routeGeometry.value = getRoute.resolveMapGeometry(
+                        result.data,
+                        pickup,
+                        delivery
+                    )
                     _state.update {
                         it.copy(
                             distanceKm = result.data.distanceKm,
@@ -169,7 +195,11 @@ class BookingViewModel @Inject constructor(
                 }
                 distanceKm = routeResult.data.distanceKm
                 durationMin = routeResult.data.durationMin
-                _routeGeometry.value = RouteGeometryParser.parse(routeResult.data.geometry)
+                _routeGeometry.value = getRoute.resolveMapGeometry(
+                    routeResult.data,
+                    pickup,
+                    delivery
+                )
                 _state.update {
                     it.copy(distanceKm = distanceKm, durationMin = durationMin)
                 }
@@ -244,6 +274,8 @@ class BookingViewModel @Inject constructor(
 
     fun resetBooking() {
         routeJob?.cancel()
+        pickupGeocodeJob?.cancel()
+        deliveryGeocodeJob?.cancel()
         _state.value = BookingState()
         _priceState.value = PriceUiState.Idle
         _submitState.value = OrderSubmitState.Idle

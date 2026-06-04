@@ -21,6 +21,18 @@ class GetRouteUseCase @Inject constructor(
         pickup = pickup.lat to pickup.lng,
         delivery = delivery.lat to delivery.lng
     )
+
+    fun mapGeometry(route: RouteResponse): List<LatLng> = repo.mapGeometry(route)
+
+    suspend fun resolveMapGeometry(
+        route: RouteResponse,
+        pickup: LocationPoint,
+        delivery: LocationPoint
+    ): List<LatLng> = repo.resolveMapGeometry(
+        route = route,
+        pickup = pickup.lat to pickup.lng,
+        delivery = delivery.lat to delivery.lng
+    )
 }
 
 class GetRoadGeometryUseCase @Inject constructor(

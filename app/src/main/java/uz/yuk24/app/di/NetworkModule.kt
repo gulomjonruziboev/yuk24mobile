@@ -12,6 +12,8 @@ import okhttp3.logging.HttpLoggingInterceptor
 import retrofit2.Retrofit
 import uz.yuk24.app.BuildConfig
 import uz.yuk24.app.data.remote.AuthInterceptor
+import uz.yuk24.app.data.remote.OrsAuthInterceptor
+import uz.yuk24.app.data.remote.api.OrsApiService
 import uz.yuk24.app.data.remote.api.PublicApiService
 import java.util.concurrent.TimeUnit
 import javax.inject.Named
@@ -71,4 +73,41 @@ object NetworkModule {
     @Singleton
     fun providePublicApiService(@Named("yuk24") retrofit: Retrofit): PublicApiService =
         retrofit.create(PublicApiService::class.java)
+
+    @Provides
+    @Singleton
+    @Named("ors")
+    fun provideOrsOkHttpClient(): OkHttpClient {
+        val logging = HttpLoggingInterceptor().apply {
+            level = if (BuildConfig.DEBUG) {
+                HttpLoggingInterceptor.Level.BASIC
+            } else {
+                HttpLoggingInterceptor.Level.NONE
+            }
+        }
+        return OkHttpClient.Builder()
+            .addInterceptor(OrsAuthInterceptor())
+            .addInterceptor(logging)
+            .connectTimeout(30, TimeUnit.SECONDS)
+            .readTimeout(30, TimeUnit.SECONDS)
+            .writeTimeout(30, TimeUnit.SECONDS)
+            .build()
+    }
+
+    @Provides
+    @Singleton
+    @Named("ors")
+    fun provideOrsRetrofit(@Named("ors") client: OkHttpClient, json: Json): Retrofit {
+        val contentType = "application/json".toMediaType()
+        return Retrofit.Builder()
+            .baseUrl("https://api.openrouteservice.org/")
+            .client(client)
+            .addConverterFactory(json.asConverterFactory(contentType))
+            .build()
+    }
+
+    @Provides
+    @Singleton
+    fun provideOrsApiService(@Named("ors") retrofit: Retrofit): OrsApiService =
+        retrofit.create(OrsApiService::class.java)
 }

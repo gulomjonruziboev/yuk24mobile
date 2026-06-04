@@ -74,6 +74,7 @@
     <string name="profile_about">YUK 24 — сервис грузоперевозок по Ташкенту</string>
 
     <string name="use_current_location">Текущее местоположение</string>
+    <string name="address_unknown">Адрес не определён</string>
     <string name="grant_location_permission">Разрешите доступ к геолокации</string>
     <string name="pickup_auto_hint">Нажмите на карту, чтобы отметить точку отправления</string>
     <string name="delivery_tap_hint">Отметьте точку доставки на карте</string>
