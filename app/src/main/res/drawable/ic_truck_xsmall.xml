@@ -1,0 +1,22 @@
+<vector xmlns:android="http://schemas.android.com/apk/res/android"
+    android:width="40dp"
+    android:height="40dp"
+    android:viewportWidth="48"
+    android:viewportHeight="48">
+    <!-- Smallest truck: compact van -->
+    <path
+        android:fillColor="#2563EB"
+        android:pathData="M6,28 L6,18 L24,18 L30,24 L36,24 L36,32 L33,32 A3,3 0 0 1 27,32 L21,32 A3,3 0 0 1 15,32 L9,32 A3,3 0 0 1 6,28 Z" />
+    <path
+        android:fillColor="#FFFFFF"
+        android:pathData="M9,20 L21,20 L21,26 L9,26 Z" />
+    <path
+        android:fillColor="#FFFFFF"
+        android:pathData="M24,21 L29,21 L33,25 L24,25 Z" />
+    <path
+        android:fillColor="#111827"
+        android:pathData="M18,32 m-2,0 a2,2 0 1,0 4,0 a2,2 0 1,0 -4,0 Z" />
+    <path
+        android:fillColor="#111827"
+        android:pathData="M30,32 m-2,0 a2,2 0 1,0 4,0 a2,2 0 1,0 -4,0 Z" />
+</vector>

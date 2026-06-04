@@ -1,0 +1,115 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">YUK 24</string>
+    <string name="tagline">Yuk tashish xizmati</string>
+
+    <!-- Step titles -->
+    <string name="step_progress_format">%1$d / %2$d — %3$s</string>
+    <string name="step_map_title">Manzilni tanlang</string>
+    <string name="step_load_title">Yuk og\'irligini tanlang</string>
+    <string name="step_info_title">Qo\'shimcha ma\'lumot</string>
+    <string name="step_price_title">Narxni hisoblash</string>
+    <string name="step_payment_title">To\'lov usuli</string>
+
+    <!-- Labels -->
+    <string name="pickup_label">Olish joyi</string>
+    <string name="delivery_label">Yetkazish joyi</string>
+    <string name="load_weight">Yuk og\'irligi</string>
+    <string name="unloading_question">Tushirish yordami kerakmi?</string>
+    <string name="unloading_yes">Ha, iltimos</string>
+    <string name="unloading_no">Yo\'q, rahmat</string>
+    <string name="phone_label">Telefon raqam</string>
+    <string name="name_label">Ismingiz</string>
+    <string name="name_optional">Ixtiyoriy</string>
+    <string name="phone_hint">XX XXX XX XX</string>
+    <string name="country_code_uz">🇺🇿 UZ +998</string>
+
+    <!-- Actions -->
+    <string name="continue_action">Davom etish →</string>
+    <string name="calculate_price">Narxni hisoblash</string>
+    <string name="place_order">Buyurtma berish</string>
+    <string name="cash_payment">Naqd pul</string>
+    <string name="cash_payment_sub">Haydovchiga to\'lang</string>
+    <string name="payment_method">To\'lov usuli</string>
+
+    <!-- Price card -->
+    <string name="estimated_price">Taxminiy narx</string>
+    <string name="price_details">NARX TAFSILOTLARI</string>
+    <string name="base_price">Asosiy narx</string>
+    <string name="min_price">Boshlang\'ich narx</string>
+    <string name="distance_label">Masofa</string>
+    <string name="load_coefficient">Yuk koeffitsienti</string>
+    <string name="unloading_fee">Tushirish yordami</string>
+    <string name="total">Jami</string>
+    <string name="calculating_price">Narx hisoblanmoqda…</string>
+
+    <!-- Order success / tracking -->
+    <string name="order_success">Buyurtma qabul qilindi!</string>
+    <string name="order_number">Buyurtma №: %1$s</string>
+    <string name="finding_driver">Yetkazuvchingiz topilmoqda…</string>
+    <string name="track_order">Buyurtmani kuzatish</string>
+    <string name="go_home">Bosh sahifaga</string>
+    <string name="my_orders">Buyurtmalarim</string>
+    <string name="rate">Baholash</string>
+    <string name="rate_submit">Yuborish</string>
+    <string name="rate_thanks">Rahmat!</string>
+    <string name="rate_comment_hint">Izoh (ixtiyoriy)</string>
+    <string name="status_title">Holati</string>
+
+    <!-- Status names -->
+    <string name="status_queue">Haydovchi qidirilmoqda</string>
+    <string name="status_process">Haydovchi yo\'lda</string>
+    <string name="status_picked_up">Yuk olib ketildi</string>
+    <string name="status_delivered">Yetkazildi!</string>
+    <string name="status_cancelled">Bekor qilindi</string>
+
+    <!-- My orders -->
+    <string name="load_orders">Yuklash</string>
+    <string name="empty_orders">Buyurtmalar topilmadi</string>
+    <string name="enter_phone_to_load">Buyurtmalarni ko\'rish uchun telefon raqamingizni kiriting</string>
+
+    <!-- Bottom nav -->
+    <string name="nav_home">Bosh sahifa</string>
+    <string name="nav_orders">Buyurtmalarim</string>
+    <string name="nav_profile">Profil</string>
+
+    <!-- Profile -->
+    <string name="profile_title">Profil</string>
+    <string name="profile_phone">Telefon raqam</string>
+    <string name="profile_language">Til</string>
+    <string name="language_uz">O\'zbek</string>
+    <string name="language_ru">Русский</string>
+    <string name="profile_version">Versiya</string>
+    <string name="profile_about">YUK 24 — Toshkent shahri bo\'yicha yuk tashish xizmati</string>
+
+    <!-- Map screen -->
+    <string name="use_current_location">Joriy joylashuv</string>
+    <string name="grant_location_permission">Joylashuvga ruxsat bering</string>
+    <string name="pickup_auto_hint">Xaritada bosib olish joyini belgilang</string>
+    <string name="delivery_tap_hint">Yetkazish nuqtasini xaritada belgilang</string>
+    <string name="map_pickup_pin_cd">Olish joyi nuqtasi</string>
+    <string name="map_delivery_pin_cd">Yetkazish joyi nuqtasi</string>
+    <string name="call_driver">Haydovchiga qo\'ng\'iroq qilish</string>
+
+    <!-- Errors -->
+    <string name="error_network">Internet aloqasi yo\'q</string>
+    <string name="error_server">Server xatoligi</string>
+    <string name="error_not_found">Topilmadi</string>
+    <string name="error_forbidden">Ruxsat yo\'q</string>
+    <string name="error_rate_limited">Juda ko\'p so\'rovlar, biroz kuting</string>
+    <string name="error_validation">Ma\'lumotlar to\'liq emas</string>
+    <string name="error_server_unavailable">Server mavjud emas</string>
+    <string name="retry">Qayta urinish</string>
+
+    <!-- Truck/load size display -->
+    <string name="load_xsmall">100 kg gacha</string>
+    <string name="load_small">100–250 kg</string>
+    <string name="load_medium">250–500 kg</string>
+    <string name="load_large">500–750 kg</string>
+    <string name="load_xlarge">750 kg–1 tonna</string>
+
+    <!-- Misc -->
+    <string name="km_min_format">🛣 %1$s km · ⏱ ~%2$s min</string>
+    <string name="distance_with_rate">%1$s km · 3,000/km</string>
+    <string name="multiplier_format">×%1$s</string>
+</resources>

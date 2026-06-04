@@ -1,0 +1,102 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">YUK 24</string>
+    <string name="tagline">Сервис грузоперевозок</string>
+
+    <string name="step_progress_format">%1$d / %2$d — %3$s</string>
+    <string name="step_map_title">Выберите адрес</string>
+    <string name="step_load_title">Выберите вес груза</string>
+    <string name="step_info_title">Дополнительная информация</string>
+    <string name="step_price_title">Расчёт цены</string>
+    <string name="step_payment_title">Способ оплаты</string>
+
+    <string name="pickup_label">Откуда</string>
+    <string name="delivery_label">Куда</string>
+    <string name="load_weight">Вес груза</string>
+    <string name="unloading_question">Нужна помощь с разгрузкой?</string>
+    <string name="unloading_yes">Да, пожалуйста</string>
+    <string name="unloading_no">Нет, спасибо</string>
+    <string name="phone_label">Номер телефона</string>
+    <string name="name_label">Ваше имя</string>
+    <string name="name_optional">Необязательно</string>
+    <string name="phone_hint">XX XXX XX XX</string>
+    <string name="country_code_uz">🇺🇿 UZ +998</string>
+
+    <string name="continue_action">Продолжить →</string>
+    <string name="calculate_price">Рассчитать цену</string>
+    <string name="place_order">Оформить заказ</string>
+    <string name="cash_payment">Наличные</string>
+    <string name="cash_payment_sub">Оплатите водителю</string>
+    <string name="payment_method">Способ оплаты</string>
+
+    <string name="estimated_price">Примерная цена</string>
+    <string name="price_details">ДЕТАЛИ ЦЕНЫ</string>
+    <string name="base_price">Базовая цена</string>
+    <string name="min_price">Минимальная цена</string>
+    <string name="distance_label">Расстояние</string>
+    <string name="load_coefficient">Коэффициент груза</string>
+    <string name="unloading_fee">Помощь с разгрузкой</string>
+    <string name="total">Итого</string>
+    <string name="calculating_price">Расчёт цены…</string>
+
+    <string name="order_success">Заказ принят!</string>
+    <string name="order_number">Заказ №: %1$s</string>
+    <string name="finding_driver">Ищем водителя…</string>
+    <string name="track_order">Отследить заказ</string>
+    <string name="go_home">Главная</string>
+    <string name="my_orders">Мои заказы</string>
+    <string name="rate">Оценить</string>
+    <string name="rate_submit">Отправить</string>
+    <string name="rate_thanks">Спасибо!</string>
+    <string name="rate_comment_hint">Комментарий (необязательно)</string>
+    <string name="status_title">Статус</string>
+
+    <string name="status_queue">Ищем водителя</string>
+    <string name="status_process">Водитель в пути</string>
+    <string name="status_picked_up">Груз забран</string>
+    <string name="status_delivered">Доставлено!</string>
+    <string name="status_cancelled">Отменён</string>
+
+    <string name="load_orders">Загрузить</string>
+    <string name="empty_orders">Заказы не найдены</string>
+    <string name="enter_phone_to_load">Введите номер телефона, чтобы посмотреть заказы</string>
+
+    <string name="nav_home">Главная</string>
+    <string name="nav_orders">Мои заказы</string>
+    <string name="nav_profile">Профиль</string>
+
+    <string name="profile_title">Профиль</string>
+    <string name="profile_phone">Номер телефона</string>
+    <string name="profile_language">Язык</string>
+    <string name="language_uz">O\'zbek</string>
+    <string name="language_ru">Русский</string>
+    <string name="profile_version">Версия</string>
+    <string name="profile_about">YUK 24 — сервис грузоперевозок по Ташкенту</string>
+
+    <string name="use_current_location">Текущее местоположение</string>
+    <string name="grant_location_permission">Разрешите доступ к геолокации</string>
+    <string name="pickup_auto_hint">Нажмите на карту, чтобы отметить точку отправления</string>
+    <string name="delivery_tap_hint">Отметьте точку доставки на карте</string>
+    <string name="map_pickup_pin_cd">Точка отправления</string>
+    <string name="map_delivery_pin_cd">Точка доставки</string>
+    <string name="call_driver">Позвонить водителю</string>
+
+    <string name="error_network">Нет интернета</string>
+    <string name="error_server">Ошибка сервера</string>
+    <string name="error_not_found">Не найдено</string>
+    <string name="error_forbidden">Доступ запрещён</string>
+    <string name="error_rate_limited">Слишком много запросов, подождите</string>
+    <string name="error_validation">Данные неполные</string>
+    <string name="error_server_unavailable">Сервер недоступен</string>
+    <string name="retry">Повторить</string>
+
+    <string name="load_xsmall">до 100 кг</string>
+    <string name="load_small">100–250 кг</string>
+    <string name="load_medium">250–500 кг</string>
+    <string name="load_large">500–750 кг</string>
+    <string name="load_xlarge">750 кг–1 тонна</string>
+
+    <string name="km_min_format">🛣 %1$s км · ⏱ ~%2$s мин</string>
+    <string name="distance_with_rate">%1$s км · 3,000/км</string>
+    <string name="multiplier_format">×%1$s</string>
+</resources>
