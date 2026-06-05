@@ -9,6 +9,7 @@ import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.flow.first
 import kotlinx.coroutines.launch
 import uz.yuk24.app.data.local.DataStoreManager
+import uz.yuk24.app.util.AppLanguage
 import javax.inject.Inject
 
 data class ProfileState(
@@ -27,14 +28,18 @@ class ProfileViewModel @Inject constructor(
     init {
         viewModelScope.launch {
             val phone = dataStore.lastPhone.first().orEmpty()
-            val language = dataStore.appLanguage.first() ?: "uz"
+            val language = dataStore.appLanguage.first()
+                ?.takeIf { it in AppLanguage.supported }
+                ?: AppLanguage.UZ
             _state.value = ProfileState(phone = phone, language = language)
         }
     }
 
     fun setLanguage(code: String) {
+        if (code !in AppLanguage.supported) return
         viewModelScope.launch {
             dataStore.setAppLanguage(code)
+            AppLanguage.apply(code)
             _state.value = _state.value.copy(language = code)
         }
     }

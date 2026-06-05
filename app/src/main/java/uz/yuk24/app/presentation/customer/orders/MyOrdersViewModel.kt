@@ -12,6 +12,7 @@ import uz.yuk24.app.data.local.DataStoreManager
 import uz.yuk24.app.data.remote.ApiResult
 import uz.yuk24.app.domain.model.Order
 import uz.yuk24.app.domain.usecase.GetOrdersByPhoneUseCase
+import uz.yuk24.app.util.ApiErrorMessages
 import uz.yuk24.app.util.PhoneUtils
 import javax.inject.Inject
 
@@ -25,7 +26,8 @@ sealed interface MyOrdersUiState {
 @HiltViewModel
 class MyOrdersViewModel @Inject constructor(
     private val getOrdersByPhone: GetOrdersByPhoneUseCase,
-    private val dataStore: DataStoreManager
+    private val dataStore: DataStoreManager,
+    private val apiErrors: ApiErrorMessages
 ) : ViewModel() {
 
     private val _phone = MutableStateFlow("")
@@ -58,8 +60,8 @@ class MyOrdersViewModel @Inject constructor(
                     _state.value = MyOrdersUiState.Loaded(res.data)
                     dataStore.setLastPhone(normalized)
                 }
-                is ApiResult.Error -> _state.value = MyOrdersUiState.Error(res.message)
-                ApiResult.NetworkError -> _state.value = MyOrdersUiState.Error("Internet aloqasi yo'q")
+                is ApiResult.Error -> _state.value = MyOrdersUiState.Error(apiErrors.from(res))
+                ApiResult.NetworkError -> _state.value = MyOrdersUiState.Error(apiErrors.from(ApiResult.NetworkError))
                 ApiResult.Loading -> Unit
             }
         }

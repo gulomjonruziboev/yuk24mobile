@@ -21,6 +21,7 @@ import uz.yuk24.app.domain.usecase.CreateOrderUseCase
 import uz.yuk24.app.domain.usecase.GetPriceUseCase
 import uz.yuk24.app.domain.usecase.GetRouteUseCase
 import uz.yuk24.app.util.AddressGeocoder
+import uz.yuk24.app.util.ApiErrorMessages
 import uz.yuk24.app.util.PhoneUtils
 import uz.yuk24.app.util.PricingUtils
 import javax.inject.Inject
@@ -49,7 +50,8 @@ class BookingViewModel @Inject constructor(
     private val getPrice: GetPriceUseCase,
     private val createOrder: CreateOrderUseCase,
     private val dataStore: DataStoreManager,
-    private val addressGeocoder: AddressGeocoder
+    private val addressGeocoder: AddressGeocoder,
+    private val apiErrors: ApiErrorMessages
 ) : ViewModel() {
 
     private var pickupGeocodeJob: Job? = null
@@ -288,16 +290,5 @@ class BookingViewModel @Inject constructor(
         unloading = _state.value.unloading
     )
 
-    private fun errorMessage(result: ApiResult<*>): String = when (result) {
-        is ApiResult.Error -> when (result.code) {
-            400 -> result.message.ifBlank { "Ma'lumotlar to'liq emas" }
-            403 -> "Ruxsat yo'q"
-            404 -> "Topilmadi"
-            429 -> "Juda ko'p so'rovlar, biroz kuting"
-            in 500..599 -> "Server xatoligi"
-            else -> result.message
-        }
-        ApiResult.NetworkError -> "Internet aloqasi yo'q"
-        else -> "Noma'lum xato"
-    }
+    private fun errorMessage(result: ApiResult<*>): String = apiErrors.from(result)
 }

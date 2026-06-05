@@ -14,6 +14,7 @@ import uz.yuk24.app.data.remote.ApiResult
 import uz.yuk24.app.domain.model.Order
 import uz.yuk24.app.domain.usecase.GetOrderByIdUseCase
 import uz.yuk24.app.domain.usecase.SubmitReviewUseCase
+import uz.yuk24.app.util.ApiErrorMessages
 import javax.inject.Inject
 
 sealed interface TrackingUiState {
@@ -32,7 +33,8 @@ sealed interface ReviewSubmitState {
 @HiltViewModel
 class TrackingViewModel @Inject constructor(
     private val getOrderById: GetOrderByIdUseCase,
-    private val submitReview: SubmitReviewUseCase
+    private val submitReview: SubmitReviewUseCase,
+    private val apiErrors: ApiErrorMessages
 ) : ViewModel() {
 
     private val _state = MutableStateFlow<TrackingUiState>(TrackingUiState.Loading)
@@ -53,11 +55,11 @@ class TrackingViewModel @Inject constructor(
                         if (res.data.status.isTerminal || !poll) break
                     }
                     is ApiResult.Error -> {
-                        _state.value = TrackingUiState.Error(res.message)
+                        _state.value = TrackingUiState.Error(apiErrors.from(res))
                         if (!poll) break
                     }
                     ApiResult.NetworkError -> {
-                        _state.value = TrackingUiState.Error("Internet aloqasi yo'q")
+                        _state.value = TrackingUiState.Error(apiErrors.from(ApiResult.NetworkError))
                         if (!poll) break
                     }
                     ApiResult.Loading -> Unit
@@ -77,8 +79,8 @@ class TrackingViewModel @Inject constructor(
                     _state.value = TrackingUiState.Success(merged)
                     _review.value = ReviewSubmitState.Submitted
                 }
-                is ApiResult.Error -> _review.value = ReviewSubmitState.Error(res.message)
-                ApiResult.NetworkError -> _review.value = ReviewSubmitState.Error("Internet aloqasi yo'q")
+                is ApiResult.Error -> _review.value = ReviewSubmitState.Error(apiErrors.from(res))
+                ApiResult.NetworkError -> _review.value = ReviewSubmitState.Error(apiErrors.from(ApiResult.NetworkError))
                 ApiResult.Loading -> Unit
             }
         }

@@ -79,6 +79,7 @@
     <string name="profile_language">Til</string>
     <string name="language_uz">O\'zbek</string>
     <string name="language_ru">Русский</string>
+    <string name="language_en">English</string>
     <string name="profile_version">Versiya</string>
     <string name="profile_about">YUK 24 — Toshkent shahri bo\'yicha yuk tashish xizmati</string>
 
@@ -100,6 +101,7 @@
     <string name="error_rate_limited">Juda ko\'p so\'rovlar, biroz kuting</string>
     <string name="error_validation">Ma\'lumotlar to\'liq emas</string>
     <string name="error_server_unavailable">Server mavjud emas</string>
+    <string name="error_unknown">Noma\'lum xato</string>
     <string name="retry">Qayta urinish</string>
 
     <!-- Truck/load size display -->

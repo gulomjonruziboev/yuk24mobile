@@ -24,11 +24,10 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
-import androidx.core.os.LocaleListCompat
 import androidx.hilt.navigation.compose.hiltViewModel
 import uz.yuk24.app.BuildConfig
 import uz.yuk24.app.R
-import uz.yuk24.app.presentation.common.components.ToggleChoicePair
+import uz.yuk24.app.presentation.common.components.LanguageSelector
 import uz.yuk24.app.presentation.common.components.YukLogo
 import uz.yuk24.app.presentation.common.theme.BorderColor
 import uz.yuk24.app.presentation.common.theme.SurfaceWhite
@@ -117,22 +116,9 @@ fun ProfileScreen(
                         color = TextSecondary
                     )
                     Spacer(Modifier.height(8.dp))
-                    ToggleChoicePair(
-                        leftText = stringResource(R.string.language_uz),
-                        rightText = stringResource(R.string.language_ru),
-                        rightSelected = state.language == "ru",
-                        onLeftClick = {
-                            viewModel.setLanguage("uz")
-                            androidx.appcompat.app.AppCompatDelegate.setApplicationLocales(
-                                LocaleListCompat.forLanguageTags("uz")
-                            )
-                        },
-                        onRightClick = {
-                            viewModel.setLanguage("ru")
-                            androidx.appcompat.app.AppCompatDelegate.setApplicationLocales(
-                                LocaleListCompat.forLanguageTags("ru")
-                            )
-                        }
+                    LanguageSelector(
+                        selected = state.language,
+                        onSelect = viewModel::setLanguage
                     )
                 }
             }

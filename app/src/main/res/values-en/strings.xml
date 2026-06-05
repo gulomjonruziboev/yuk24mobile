@@ -1,0 +1,105 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">YUK 24</string>
+    <string name="tagline">Cargo delivery service</string>
+
+    <string name="step_progress_format">%1$d / %2$d — %3$s</string>
+    <string name="step_map_title">Choose locations</string>
+    <string name="step_load_title">Choose load size</string>
+    <string name="step_info_title">Additional details</string>
+    <string name="step_price_title">Calculate price</string>
+    <string name="step_payment_title">Payment method</string>
+
+    <string name="pickup_label">Pickup</string>
+    <string name="delivery_label">Delivery</string>
+    <string name="load_weight">Load weight</string>
+    <string name="unloading_question">Need unloading help?</string>
+    <string name="unloading_yes">Yes, please</string>
+    <string name="unloading_no">No, thanks</string>
+    <string name="phone_label">Phone number</string>
+    <string name="name_label">Your name</string>
+    <string name="name_optional">Optional</string>
+    <string name="phone_hint">XX XXX XX XX</string>
+    <string name="country_code_uz">🇺🇿 UZ +998</string>
+
+    <string name="continue_action">Continue →</string>
+    <string name="calculate_price">Calculate price</string>
+    <string name="place_order">Place order</string>
+    <string name="cash_payment">Cash</string>
+    <string name="cash_payment_sub">Pay the driver</string>
+    <string name="payment_method">Payment method</string>
+
+    <string name="estimated_price">Estimated price</string>
+    <string name="price_details">PRICE BREAKDOWN</string>
+    <string name="base_price">Base price</string>
+    <string name="min_price">Starting price</string>
+    <string name="distance_label">Distance</string>
+    <string name="load_coefficient">Load tier</string>
+    <string name="unloading_fee">Unloading help</string>
+    <string name="total">Total</string>
+    <string name="calculating_price">Calculating price…</string>
+
+    <string name="order_success">Order placed!</string>
+    <string name="order_number">Order №: %1$s</string>
+    <string name="finding_driver">Finding your driver…</string>
+    <string name="track_order">Track order</string>
+    <string name="go_home">Home</string>
+    <string name="my_orders">My orders</string>
+    <string name="rate">Rate</string>
+    <string name="rate_submit">Submit</string>
+    <string name="rate_thanks">Thank you!</string>
+    <string name="rate_comment_hint">Comment (optional)</string>
+    <string name="status_title">Status</string>
+
+    <string name="status_queue">Finding a driver</string>
+    <string name="status_process">Driver on the way</string>
+    <string name="status_picked_up">Cargo picked up</string>
+    <string name="status_delivered">Delivered!</string>
+    <string name="status_cancelled">Cancelled</string>
+
+    <string name="load_orders">Load</string>
+    <string name="empty_orders">No orders found</string>
+    <string name="enter_phone_to_load">Enter your phone number to view orders</string>
+
+    <string name="nav_home">Home</string>
+    <string name="nav_orders">My orders</string>
+    <string name="nav_profile">Profile</string>
+
+    <string name="profile_title">Profile</string>
+    <string name="profile_phone">Phone number</string>
+    <string name="profile_language">Language</string>
+    <string name="language_uz">O\'zbek</string>
+    <string name="language_ru">Русский</string>
+    <string name="language_en">English</string>
+    <string name="profile_version">Version</string>
+    <string name="profile_about">YUK 24 — cargo delivery across Tashkent</string>
+
+    <string name="use_current_location">Current location</string>
+    <string name="address_unknown">Address not found</string>
+    <string name="grant_location_permission">Allow location access</string>
+    <string name="pickup_auto_hint">Tap the map to set pickup point</string>
+    <string name="delivery_tap_hint">Tap the map to set delivery point</string>
+    <string name="map_pickup_pin_cd">Pickup pin</string>
+    <string name="map_delivery_pin_cd">Delivery pin</string>
+    <string name="call_driver">Call driver</string>
+
+    <string name="error_network">No internet connection</string>
+    <string name="error_server">Server error</string>
+    <string name="error_not_found">Not found</string>
+    <string name="error_forbidden">Access denied</string>
+    <string name="error_rate_limited">Too many requests, please wait</string>
+    <string name="error_validation">Incomplete information</string>
+    <string name="error_server_unavailable">Server unavailable</string>
+    <string name="error_unknown">Unknown error</string>
+    <string name="retry">Retry</string>
+
+    <string name="load_xsmall">Up to 100 kg</string>
+    <string name="load_small">100–250 kg</string>
+    <string name="load_medium">250–500 kg</string>
+    <string name="load_large">500–750 kg</string>
+    <string name="load_xlarge">750 kg–1 ton</string>
+
+    <string name="km_min_format">🛣 %1$s km · ⏱ ~%2$s min</string>
+    <string name="distance_with_rate">%1$s km · 3,000/km</string>
+    <string name="multiplier_format">×%1$s</string>
+</resources>

@@ -42,7 +42,7 @@ android {
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
         vectorDrawables { useSupportLibrary = true }
 
-        resourceConfigurations += listOf("uz", "ru")
+        resourceConfigurations += listOf("uz", "ru", "en")
     }
 
     buildTypes {

@@ -70,6 +70,7 @@
     <string name="profile_language">Язык</string>
     <string name="language_uz">O\'zbek</string>
     <string name="language_ru">Русский</string>
+    <string name="language_en">English</string>
     <string name="profile_version">Версия</string>
     <string name="profile_about">YUK 24 — сервис грузоперевозок по Ташкенту</string>
 
@@ -89,6 +90,7 @@
     <string name="error_rate_limited">Слишком много запросов, подождите</string>
     <string name="error_validation">Данные неполные</string>
     <string name="error_server_unavailable">Сервер недоступен</string>
+    <string name="error_unknown">Неизвестная ошибка</string>
     <string name="retry">Повторить</string>
 
     <string name="load_xsmall">до 100 кг</string>
