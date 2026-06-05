@@ -18,6 +18,7 @@ data class OrderDto(
     val durationMin: Double,
     val status: String,
     val cancelReason: String? = null,
+    @Serializable(with = DriverIdSerializer::class)
     val driverId: DriverInfoDto? = null,
     val review: ReviewDto? = null,
     val createdAt: String,
@@ -26,8 +27,8 @@ data class OrderDto(
 
 @Serializable
 data class DriverInfoDto(
-    val username: String,
-    val name: String,
+    val username: String? = null,
+    val name: String? = null,
     val phone: String? = null
 )
 

@@ -27,6 +27,7 @@ import androidx.navigation.compose.currentBackStackEntryAsState
 import androidx.navigation.compose.navigation
 import androidx.navigation.compose.rememberNavController
 import uz.yuk24.app.R
+import uz.yuk24.app.util.PhoneUtils
 import uz.yuk24.app.presentation.common.theme.Primary
 import uz.yuk24.app.presentation.common.theme.SurfaceWhite
 import uz.yuk24.app.presentation.common.theme.TextSecondary
@@ -122,7 +123,7 @@ fun Yuk24App() {
                 val orderIdLabel = entry.arguments?.getString("orderIdLabel").orEmpty()
                 val internalId = entry.arguments?.getString("internalId").orEmpty()
                 val phoneArg = entry.arguments?.getString("phone").orEmpty()
-                val decodedPhone = runCatching { java.net.URLDecoder.decode(phoneArg, "UTF-8") }.getOrDefault("")
+                val decodedPhone = PhoneUtils.fromNavArg(phoneArg)
                 OrderSuccessScreen(
                     orderId = orderIdLabel,
                     onTrack = {
@@ -140,7 +141,7 @@ fun Yuk24App() {
             composable(Destinations.ORDER_TRACKING) { entry ->
                 val orderIdArg = entry.arguments?.getString("orderId").orEmpty()
                 val phoneArg = entry.arguments?.getString("phone").orEmpty()
-                val decodedPhone = runCatching { java.net.URLDecoder.decode(phoneArg, "UTF-8") }.getOrDefault("")
+                val decodedPhone = PhoneUtils.fromNavArg(phoneArg)
                 OrderTrackingScreen(
                     orderId = orderIdArg,
                     phone = decodedPhone,
@@ -159,7 +160,7 @@ fun Yuk24App() {
             composable(Destinations.ORDER_DETAIL) { entry ->
                 val orderIdArg = entry.arguments?.getString("orderId").orEmpty()
                 val phoneArg = entry.arguments?.getString("phone").orEmpty()
-                val decodedPhone = runCatching { java.net.URLDecoder.decode(phoneArg, "UTF-8") }.getOrDefault("")
+                val decodedPhone = PhoneUtils.fromNavArg(phoneArg)
                 OrderDetailScreen(
                     orderId = orderIdArg,
                     phone = decodedPhone,

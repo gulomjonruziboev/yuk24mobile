@@ -42,7 +42,8 @@ data class Order(
             durationMin = dto.durationMin,
             status = OrderStatus.fromKey(dto.status),
             cancelReason = dto.cancelReason,
-            driverName = dto.driverId?.name,
+            driverName = dto.driverId?.name?.takeIf { it.isNotBlank() }
+                ?: dto.driverId?.username?.takeIf { it.isNotBlank() },
             driverPhone = dto.driverId?.phone,
             rating = dto.review?.rating,
             reviewComment = dto.review?.comment,

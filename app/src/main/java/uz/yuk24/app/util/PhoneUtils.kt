@@ -3,6 +3,31 @@ package uz.yuk24.app.util
 object PhoneUtils {
 
     /**
+     * Decode phone from a Navigation path segment.
+     * Decodes `%XX` only (like [android.net.Uri.decode]); does not treat `+` as space.
+     */
+    fun fromNavArg(encoded: String): String {
+        if (encoded.isBlank()) return ""
+        return decodePathSegment(encoded).trim()
+    }
+
+    private fun decodePathSegment(value: String): String {
+        val out = StringBuilder(value.length)
+        var i = 0
+        while (i < value.length) {
+            if (value[i] == '%' && i + 2 < value.length) {
+                val hex = value.substring(i + 1, i + 3)
+                out.append(hex.toInt(16).toChar())
+                i += 3
+            } else {
+                out.append(value[i])
+                i++
+            }
+        }
+        return out.toString()
+    }
+
+    /**
      * Normalises an input phone number to the canonical "+998XXXXXXXXX" form
      * the backend expects (spec §5.8).
      */

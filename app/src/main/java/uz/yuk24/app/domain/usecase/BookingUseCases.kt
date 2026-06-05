@@ -74,7 +74,17 @@ class GetOrderByIdUseCase @Inject constructor(
     private val repo: OrderRepository
 ) {
     suspend operator fun invoke(id: String, phone: String?): ApiResult<Order> {
-        return when (val res = repo.getOrderById(id, phone)) {
+        val first = repo.getOrderById(id, phone)
+        val res = if (
+            first is ApiResult.Error &&
+            first.code == 403 &&
+            !phone.isNullOrBlank()
+        ) {
+            repo.getOrderById(id, phone = null)
+        } else {
+            first
+        }
+        return when (res) {
             is ApiResult.Success -> ApiResult.Success(Order.fromDto(res.data))
             is ApiResult.Error -> res
             is ApiResult.NetworkError -> ApiResult.NetworkError

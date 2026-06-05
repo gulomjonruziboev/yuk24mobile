@@ -20,7 +20,7 @@ class OrderRepository @Inject constructor(
         safeApiCall { api.createOrder(body) }
 
     suspend fun getOrderById(id: String, phone: String?): ApiResult<OrderDto> =
-        safeApiCall { api.getOrderById(id, phone) }
+        safeApiCall { api.getOrderById(id, phone?.takeIf { it.isNotBlank() }) }
 
     suspend fun getOrdersByPhone(phone: String): ApiResult<List<OrderDto>> =
         safeApiCall { api.getOrdersByPhone(phone) }

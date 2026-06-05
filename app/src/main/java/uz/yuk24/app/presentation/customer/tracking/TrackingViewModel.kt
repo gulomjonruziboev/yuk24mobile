@@ -73,7 +73,8 @@ class TrackingViewModel @Inject constructor(
             _review.value = ReviewSubmitState.Submitting
             when (val res = submitReview(orderId, rating, comment)) {
                 is ApiResult.Success -> {
-                    _state.value = TrackingUiState.Success(res.data)
+                    val merged = mergeDriverFromPrevious(_state.value, res.data)
+                    _state.value = TrackingUiState.Success(merged)
                     _review.value = ReviewSubmitState.Submitted
                 }
                 is ApiResult.Error -> _review.value = ReviewSubmitState.Error(res.message)
@@ -81,6 +82,15 @@ class TrackingViewModel @Inject constructor(
                 ApiResult.Loading -> Unit
             }
         }
+    }
+
+    private fun mergeDriverFromPrevious(current: TrackingUiState, updated: Order): Order {
+        val prior = (current as? TrackingUiState.Success)?.order ?: return updated
+        if (!updated.driverName.isNullOrBlank()) return updated
+        return updated.copy(
+            driverName = prior.driverName,
+            driverPhone = prior.driverPhone ?: updated.driverPhone
+        )
     }
 
     override fun onCleared() {
